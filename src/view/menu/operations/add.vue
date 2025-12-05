@@ -46,73 +46,73 @@
 </template>
 <script>
 export default {
-  props: {
-    isEdit: {
-      type: Boolean,
-      default: false
-    },
-    isShow: {
-      type: Boolean,
-      default: false
-    },
-    item: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  watch: {
-    item (newval, oldval) {
-      this.localItem = { ...newval }
-    },
-    isShow () {
-      this.showStatus = this.isShow
-    }
-  },
-  data () {
-    return {
-      loading: true,
-      showStatus: false,
-      localItem: {
-        name: '',
-        path: '',
-        method: '',
-        type: '',
-        regmark: ''
-      },
-      ruleValidate: {
-        name: [{ required: true, message: '请输入资源名称', trigger: 'blur' }],
-        path: [{ required: true, message: '请输入资源路径', trigger: 'blur' }],
-        method: [
-          { required: true, message: '请选择请求方式', trigger: 'blur' }
-        ],
-        type: [{ required: true, message: '请选择资源类型', trigger: 'blur' }]
-      }
-    }
-  },
-  mounted () {},
-  methods: {
-    ok () {
-      this.$refs.table.validate((valid) => {
-        if (valid) {
-          this.loading = false
-          this.$emit('changeEvent', false)
-          this.$emit('editEvent', { ...this.localItem })
-          setTimeout(() => {
-            this.$refs.table.resetFields()
-          }, 0)
-          this.$Message.info('添加成功！')
-        } else {
-          this.loading = false
-          this.$nextTick(() => (this.loading = true))
-          this.$Message.error('请检查输入数据')
+    props: {
+        isEdit: {
+            type: Boolean,
+            default: false
+        },
+        isShow: {
+            type: Boolean,
+            default: false
+        },
+        item: {
+            type: Object,
+            default: () => {}
         }
-      })
     },
-    cancel () {
-      this.$refs.table.resetFields()
-      this.$emit('changeEvent', false)
-      this.$Message.info('取消编辑！')
+    watch: {
+        item(newval, oldval) {
+            this.localItem = { ...newval }
+        },
+        isShow() {
+            this.showStatus = this.isShow
+        }
+    },
+    data() {
+        return {
+            loading: true,
+            showStatus: false,
+            localItem: {
+                name: '',
+                path: '',
+                method: '',
+                type: '',
+                regmark: ''
+            },
+            ruleValidate: {
+                name: [{ required: true, message: '请输入资源名称', trigger: 'blur' }],
+                path: [{ required: true, message: '请输入资源路径', trigger: 'blur' }],
+                method: [
+                    { required: true, message: '请选择请求方式', trigger: 'blur' }
+                ],
+                type: [{ required: true, message: '请选择资源类型', trigger: 'blur' }]
+            }
+        }
+    },
+    mounted() {},
+    methods: {
+        ok() {
+            this.$refs.table.validate((valid) => {
+                if (valid) {
+                    this.loading = false
+                    this.$emit('changeEvent', false)
+                    this.$emit('editEvent', { ...this.localItem })
+                    setTimeout(() => {
+                        this.$refs.table.resetFields()
+                    }, 0)
+                    this.$Message.info('添加成功！')
+                } else {
+                    this.loading = false
+                    this.$nextTick(() => (this.loading = true))
+                    this.$Message.error('请检查输入数据')
+                }
+            })
+        },
+        cancel() {
+            this.$refs.table.resetFields()
+            this.$emit('changeEvent', false)
+            this.$Message.info('取消编辑！')
+        }
     }
-  }
 }
 </script>

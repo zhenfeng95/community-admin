@@ -37,56 +37,56 @@
 </template>
 <script>
 export default {
-  props: {
-    isShow: {
-      type: Boolean,
-      default: false
-    },
-    users: {
-      type: Object,
-      default: () => []
-    }
-  },
-  watch: {
-    isShow () {
-      this.showStatus = this.isShow
-    },
-    users () {
-      const arr = []
-      for (const item in this.users) {
-        arr.push(item)
-      }
-      this.localItem.users = arr
-    }
-  },
-  data () {
-    return {
-      showStatus: false,
-      localItem: {
-        status: '',
-        forbid: '',
-        users: []
-      }
-    }
-  },
-  methods: {
-    ok () {
-      // this.$refs.table.resetFields()
-      this.$emit('changeEvent', false)
-      const result = {}
-      for (var key of Object.keys(this.localItem)) {
-        if (this.localItem[key] !== '') {
-          result[key] = this.localItem[key]
+    props: {
+        isShow: {
+            type: Boolean,
+            default: false
+        },
+        users: {
+            type: Object,
+            default: () => []
         }
-      }
-      this.$emit('editEvent', result)
-      this.$Message.info('设置成功！')
     },
-    cancel () {
-      this.$refs.table.resetFields()
-      this.$emit('changeEvent', false)
-      this.$Message.info('取消设置！')
+    watch: {
+        isShow() {
+            this.showStatus = this.isShow
+        },
+        users() {
+            const arr = []
+            for (const item in this.users) {
+                arr.push(item)
+            }
+            this.localItem.users = arr
+        }
+    },
+    data() {
+        return {
+            showStatus: false,
+            localItem: {
+                status: '',
+                forbid: '',
+                users: []
+            }
+        }
+    },
+    methods: {
+        ok() {
+            // this.$refs.table.resetFields()
+            this.$emit('changeEvent', false)
+            const result = {}
+            for (var key of Object.keys(this.localItem)) {
+                if (this.localItem[key] !== '') {
+                    result[key] = this.localItem[key]
+                }
+            }
+            this.$emit('editEvent', result)
+            this.$Message.info('设置成功！')
+        },
+        cancel() {
+            this.$refs.table.resetFields()
+            this.$emit('changeEvent', false)
+            this.$Message.info('取消设置！')
+        }
     }
-  }
 }
 </script>

@@ -11,30 +11,30 @@
 
 <script>
 export default {
-  props: {
-    row: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  methods: {
-    more () {
-      this.$Modal.info({
-        title: '详情',
-        // content: JSON.stringify(this.row.param),
-        render: (h, params) => {
-          return h('Input', {
-            props: {
-              // disabled: true,
-              type: 'textarea',
-              value: JSON.stringify(this.row.param, null, 2),
-              rows: 16
-            }
-          })
+    props: {
+        row: {
+            type: Object,
+            default: () => {}
         }
-      })
+    },
+    methods: {
+        more() {
+            this.$Modal.info({
+                title: '详情',
+                // content: JSON.stringify(this.row.param),
+                render: (h, params) => {
+                    return h('Input', {
+                        props: {
+                            // disabled: true,
+                            type: 'textarea',
+                            value: JSON.stringify(this.row.param, null, 2),
+                            rows: 16
+                        }
+                    })
+                }
+            })
+        }
     }
-  }
 }
 </script>
 

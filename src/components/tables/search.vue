@@ -51,56 +51,56 @@
 
 <script>
 export default {
-  props: {
-    item: {
-      type: Object,
-      default: () => {}
-    },
-    value: {
-      type: [String, Array, Number],
-      default: ''
-    }
-  },
-  data () {
-    return {
-      selection: [],
-      radioOptions: [
-        {
-          key: '全部',
-          value: ''
+    props: {
+        item: {
+            type: Object,
+            default: () => {}
         },
-        {
-          key: '否',
-          value: '0'
-        },
-        {
-          key: '是',
-          value: '1'
+        value: {
+            type: [String, Array, Number],
+            default: ''
         }
-      ]
-    }
-  },
-  computed: {
-    finalRadio () {
-      let result = {}
-      if (this.item.type === 'radio') {
-        if (this.item.options) {
-          result = this.item.options
-        } else {
-          result = this.radioOptions
-        }
-      }
-      return result
     },
-    inputValue () {
-      return this.value
+    data() {
+        return {
+            selection: [],
+            radioOptions: [
+                {
+                    key: '全部',
+                    value: ''
+                },
+                {
+                    key: '否',
+                    value: '0'
+                },
+                {
+                    key: '是',
+                    value: '1'
+                }
+            ]
+        }
+    },
+    computed: {
+        finalRadio() {
+            let result = {}
+            if (this.item.type === 'radio') {
+                if (this.item.options) {
+                    result = this.item.options
+                } else {
+                    result = this.radioOptions
+                }
+            }
+            return result
+        },
+        inputValue() {
+            return this.value
+        }
+    },
+    methods: {
+        handleChange(value) {
+            this.$emit('changeEvent', value)
+        }
     }
-  },
-  methods: {
-    handleChange (value) {
-      this.$emit('changeEvent', value)
-    }
-  }
 }
 </script>
 

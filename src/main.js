@@ -17,7 +17,7 @@ import VOrgTree from 'v-org-tree'
 import 'v-org-tree/dist/v-org-tree.css'
 
 Vue.use(ViewUI, {
-  i18n: (key, value) => i18n.t(key, value)
+    i18n: (key, value) => i18n.t(key, value)
 })
 Vue.use(TreeTable)
 Vue.use(VOrgTree)
@@ -41,9 +41,9 @@ Vue.directive('clickOutside', clickOutside)
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  i18n,
-  store,
-  render: (h) => h(App)
+    el: '#app',
+    router,
+    i18n,
+    store,
+    render: (h) => h(App)
 })

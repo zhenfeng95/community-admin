@@ -7,25 +7,25 @@ import app from './module/app'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
+    state: {
     //
-    sid: '',
-    loaded: false
-  },
-  mutations: {
-    //
-    setSid (state, value) {
-      state.sid = value
+        sid: '',
+        loaded: false
     },
-    setLoaded (state, value) {
-      state.loaded = value
-    }
-  },
-  actions: {
+    mutations: {
     //
-  },
-  modules: {
-    user,
-    app
-  }
+        setSid(state, value) {
+            state.sid = value
+        },
+        setLoaded(state, value) {
+            state.loaded = value
+        }
+    },
+    actions: {
+    //
+    },
+    modules: {
+        user,
+        app
+    }
 })

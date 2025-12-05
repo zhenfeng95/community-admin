@@ -39,61 +39,61 @@
 <script>
 import Tables from '_c/tables'
 export default {
-  props: {
-    columns: {
-      type: Array,
-      default: () => []
+    props: {
+        columns: {
+            type: Array,
+            default: () => []
+        },
+        tableData: {
+            type: Array,
+            default: () => []
+        },
+        isEdit: {
+            type: Boolean,
+            default: false
+        }
     },
-    tableData: {
-      type: Array,
-      default: () => []
+    components: {
+        Tables
     },
-    isEdit: {
-      type: Boolean,
-      default: false
-    }
-  },
-  components: {
-    Tables
-  },
-  data () {
-    return {
-      page: 1,
-      limit: 10,
-      total: 0,
-      pageArr: [10, 20, 30, 50, 100],
-      selection: [],
-      current: 0,
-      localData: []
-    }
-  },
-  watch: {
-    tableData (newval, oldval) {
-      localStorage.setItem('localData', JSON.stringify(newval))
-      this.localData = newval
-    }
-  },
-  methods: {
-    handleSelect (selection) {
-      this.selection = selection
-      this.$emit('on-change', selection)
-      if (!this.isEdit) {
-        setTimeout(() => {
-          const tmpData = localStorage.getItem('localData')
-          if (typeof tmpData !== 'undefined') {
-            this.localData = JSON.parse(tmpData)
-          }
-          this.$Message.warning('无法修改，请选择权限进行编辑！')
-        }, 0)
-      }
+    data() {
+        return {
+            page: 1,
+            limit: 10,
+            total: 0,
+            pageArr: [10, 20, 30, 50, 100],
+            selection: [],
+            current: 0,
+            localData: []
+        }
     },
-    onPageChange (page) {
-      this.page = page
+    watch: {
+        tableData(newval, oldval) {
+            localStorage.setItem('localData', JSON.stringify(newval))
+            this.localData = newval
+        }
     },
-    onPageSizeChange (size) {
-      this.limit = size
+    methods: {
+        handleSelect(selection) {
+            this.selection = selection
+            this.$emit('on-change', selection)
+            if (!this.isEdit) {
+                setTimeout(() => {
+                    const tmpData = localStorage.getItem('localData')
+                    if (typeof tmpData !== 'undefined') {
+                        this.localData = JSON.parse(tmpData)
+                    }
+                    this.$Message.warning('无法修改，请选择权限进行编辑！')
+                }, 0)
+            }
+        },
+        onPageChange(page) {
+            this.page = page
+        },
+        onPageSizeChange(size) {
+            this.limit = size
+        }
     }
-  }
 }
 </script>
 

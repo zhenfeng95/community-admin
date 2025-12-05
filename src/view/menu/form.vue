@@ -84,79 +84,79 @@
 
 <script>
 export default {
-  props: {
-    isEdit: {
-      type: Boolean,
-      default: false
-    },
-    formData: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  data () {
-    return {
-      formRules: {
-        title: [
-          {
-            required: true,
-            message: '菜单名称不得为空',
-            trigger: 'blur'
-          }
-        ],
-        name: [
-          {
-            required: true,
-            message: '组件名称不得为空',
-            trigger: 'blur'
-          }
-        ],
-        path: [
-          {
-            required: true,
-            message: '路由路径不得为空',
-            trigger: 'blur'
-          }
-        ],
-        component: [
-          {
-            required: true,
-            message: '前端组件不得为空',
-            trigger: 'blur'
-          }
-        ]
-      }
-    }
-  },
-  methods: {
-    submit () {
-      this.$refs.form.validate((valid) => {
-        if (valid) {
-          // 检验通过后的逻辑
-          const data = {
-            ...this.formData,
-            expand: true
-          }
-          this.$emit('submit', data)
-          // 恢复到默认状态
-          this.initFields()
-          // 2. 提交对应的数据到后台接口
-        } else {
-          this.$Message.error('请检验表单数据！')
+    props: {
+        isEdit: {
+            type: Boolean,
+            default: false
+        },
+        formData: {
+            type: Object,
+            default: () => {}
         }
-      })
     },
-    cancel () {
-      this.initFields()
+    data() {
+        return {
+            formRules: {
+                title: [
+                    {
+                        required: true,
+                        message: '菜单名称不得为空',
+                        trigger: 'blur'
+                    }
+                ],
+                name: [
+                    {
+                        required: true,
+                        message: '组件名称不得为空',
+                        trigger: 'blur'
+                    }
+                ],
+                path: [
+                    {
+                        required: true,
+                        message: '路由路径不得为空',
+                        trigger: 'blur'
+                    }
+                ],
+                component: [
+                    {
+                        required: true,
+                        message: '前端组件不得为空',
+                        trigger: 'blur'
+                    }
+                ]
+            }
+        }
     },
-    initFields () {
-      this.$emit('cancel')
-      this.$refs.form.resetFields()
-    },
-    setMenu (data) {
-      this.$emit('submit', data)
+    methods: {
+        submit() {
+            this.$refs.form.validate((valid) => {
+                if (valid) {
+                    // 检验通过后的逻辑
+                    const data = {
+                        ...this.formData,
+                        expand: true
+                    }
+                    this.$emit('submit', data)
+                    // 恢复到默认状态
+                    this.initFields()
+                    // 2. 提交对应的数据到后台接口
+                } else {
+                    this.$Message.error('请检验表单数据！')
+                }
+            })
+        },
+        cancel() {
+            this.initFields()
+        },
+        initFields() {
+            this.$emit('cancel')
+            this.$refs.form.resetFields()
+        },
+        setMenu(data) {
+            this.$emit('submit', data)
+        }
     }
-  }
 }
 </script>
 

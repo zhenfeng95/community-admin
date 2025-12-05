@@ -14,12 +14,12 @@
 
 <script>
 export default {
-  props: {
-    row: {
-      type: Object,
-      default: () => {}
+    props: {
+        row: {
+            type: Object,
+            default: () => {}
+        }
     }
-  }
 }
 </script>
 

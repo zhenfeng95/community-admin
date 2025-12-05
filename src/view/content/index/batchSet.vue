@@ -55,88 +55,88 @@
 <script>
 import { getTags } from '@/api/content'
 export default {
-  props: {
-    isShow: {
-      type: Boolean,
-      default: false
-    }
-  },
-  watch: {
-    isShow () {
-      this.showStatus = this.isShow
-    }
-  },
-  data () {
-    return {
-      showStatus: false,
-      roles: ['super_admin', 'admin', 'user'],
-      tags: [],
-      localItem: {
-        catalog: '',
-        status: '',
-        isEnd: '',
-        isTop: '',
-        tags: []
-      },
-      catalogs: [
-        {
-          key: '提问',
-          value: 'ask'
-        },
-        {
-          key: '建议',
-          value: 'advise'
-        },
-        {
-          key: '分享',
-          value: 'share'
-        },
-        {
-          key: '动态',
-          value: 'logs'
-        },
-        {
-          key: '公告',
-          value: 'notice'
+    props: {
+        isShow: {
+            type: Boolean,
+            default: false
         }
-      ]
-    }
-  },
-  mounted () {
-    getTags({ page: 0, limit: 1000 }).then((res) => {
-      this.tags = res.data
-    })
-  },
-  methods: {
-    ok () {
-      // this.$refs.table.resetFields()
-      this.$emit('changeEvent', false)
-      const result = {}
-      for (var key of Object.keys(this.localItem)) {
-        const tags = []
-        if (key === 'tags' && this.localItem.tags.length > 0) {
-          this.tags.map((o) => {
-            if (this.localItem.tags.includes(o._id)) {
-              tags.push({
-                class: o.tagClass,
-                name: o.tagName
-              })
-            }
-          })
-          this.localItem[key] = tags
-        }
-        if (this.localItem[key] !== '') {
-          result[key] = this.localItem[key]
-        }
-      }
-      this.$emit('editEvent', result)
-      this.$Message.info('设置成功！')
     },
-    cancel () {
-      this.$refs.table.resetFields()
-      this.$emit('changeEvent', false)
-      this.$Message.info('取消设置！')
+    watch: {
+        isShow() {
+            this.showStatus = this.isShow
+        }
+    },
+    data() {
+        return {
+            showStatus: false,
+            roles: ['super_admin', 'admin', 'user'],
+            tags: [],
+            localItem: {
+                catalog: '',
+                status: '',
+                isEnd: '',
+                isTop: '',
+                tags: []
+            },
+            catalogs: [
+                {
+                    key: '提问',
+                    value: 'ask'
+                },
+                {
+                    key: '建议',
+                    value: 'advise'
+                },
+                {
+                    key: '分享',
+                    value: 'share'
+                },
+                {
+                    key: '动态',
+                    value: 'logs'
+                },
+                {
+                    key: '公告',
+                    value: 'notice'
+                }
+            ]
+        }
+    },
+    mounted() {
+        getTags({ page: 0, limit: 1000 }).then((res) => {
+            this.tags = res.data
+        })
+    },
+    methods: {
+        ok() {
+            // this.$refs.table.resetFields()
+            this.$emit('changeEvent', false)
+            const result = {}
+            for (var key of Object.keys(this.localItem)) {
+                const tags = []
+                if (key === 'tags' && this.localItem.tags.length > 0) {
+                    this.tags.map((o) => {
+                        if (this.localItem.tags.includes(o._id)) {
+                            tags.push({
+                                class: o.tagClass,
+                                name: o.tagName
+                            })
+                        }
+                    })
+                    this.localItem[key] = tags
+                }
+                if (this.localItem[key] !== '') {
+                    result[key] = this.localItem[key]
+                }
+            }
+            this.$emit('editEvent', result)
+            this.$Message.info('设置成功！')
+        },
+        cancel() {
+            this.$refs.table.resetFields()
+            this.$emit('changeEvent', false)
+            this.$Message.info('取消设置！')
+        }
     }
-  }
 }
 </script>

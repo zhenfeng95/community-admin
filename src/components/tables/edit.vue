@@ -26,35 +26,35 @@
 
 <script>
 export default {
-  name: 'TablesEdit',
-  props: {
-    value: [String, Number],
-    edittingCellId: String,
-    params: Object,
-    editable: Boolean
-  },
-  computed: {
-    isEditting () {
-      return (
-        this.edittingCellId ===
+    name: 'TablesEdit',
+    props: {
+        value: [String, Number],
+        edittingCellId: String,
+        params: Object,
+        editable: Boolean
+    },
+    computed: {
+        isEditting() {
+            return (
+                this.edittingCellId ===
         `editting-${this.params.index}-${this.params.column.key}`
-      )
+            )
+        }
+    },
+    methods: {
+        handleInput(val) {
+            this.$emit('input', val)
+        },
+        startEdit() {
+            this.$emit('on-start-edit', this.params)
+        },
+        saveEdit() {
+            this.$emit('on-save-edit', this.params)
+        },
+        canceltEdit() {
+            this.$emit('on-cancel-edit', this.params)
+        }
     }
-  },
-  methods: {
-    handleInput (val) {
-      this.$emit('input', val)
-    },
-    startEdit () {
-      this.$emit('on-start-edit', this.params)
-    },
-    saveEdit () {
-      this.$emit('on-save-edit', this.params)
-    },
-    canceltEdit () {
-      this.$emit('on-cancel-edit', this.params)
-    }
-  }
 }
 </script>
 

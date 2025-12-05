@@ -22,41 +22,41 @@
 import './user.less'
 import { mapActions } from 'vuex'
 export default {
-  name: 'User',
-  props: {
-    userAvatar: {
-      type: String,
-      default: ''
+    name: 'User',
+    props: {
+        userAvatar: {
+            type: String,
+            default: ''
+        },
+        messageUnreadCount: {
+            type: Number,
+            default: 0
+        }
     },
-    messageUnreadCount: {
-      type: Number,
-      default: 0
+    methods: {
+        ...mapActions(['handleLogOut']),
+        logout() {
+            this.handleLogOut().then(() => {
+                this.$router.push({
+                    name: 'login'
+                })
+            })
+        },
+        message() {
+            this.$router.push({
+                name: 'message_page'
+            })
+        },
+        handleClick(name) {
+            switch (name) {
+            case 'logout':
+                this.logout()
+                break
+            case 'message':
+                this.message()
+                break
+            }
+        }
     }
-  },
-  methods: {
-    ...mapActions(['handleLogOut']),
-    logout () {
-      this.handleLogOut().then(() => {
-        this.$router.push({
-          name: 'login'
-        })
-      })
-    },
-    message () {
-      this.$router.push({
-        name: 'message_page'
-      })
-    },
-    handleClick (name) {
-      switch (name) {
-        case 'logout':
-          this.logout()
-          break
-        case 'message':
-          this.message()
-          break
-      }
-    }
-  }
 }
 </script>

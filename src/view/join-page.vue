@@ -36,10 +36,10 @@
 
 <script>
 export default {
-  name: 'join_page',
-  data () {
-    return {}
-  }
+    name: 'join_page',
+    data() {
+        return {}
+    }
 }
 </script>
 <style>

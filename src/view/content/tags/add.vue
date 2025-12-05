@@ -29,55 +29,55 @@
 </template>
 <script>
 export default {
-  props: {
-    isShow: {
-      type: Boolean,
-      default: false
+    props: {
+        isShow: {
+            type: Boolean,
+            default: false
+        },
+        isEdit: {
+            type: Boolean,
+            default: false
+        },
+        item: {
+            type: Object,
+            default: () => {}
+        }
     },
-    isEdit: {
-      type: Boolean,
-      default: false
+    watch: {
+        item(newval, oldval) {
+            this.localItem = newval
+        },
+        isShow() {
+            this.showStatus = this.isShow
+        }
     },
-    item: {
-      type: Object,
-      default: () => {}
-    }
-  },
-  watch: {
-    item (newval, oldval) {
-      this.localItem = newval
+    data() {
+        return {
+            showStatus: false,
+            localItem: {
+                tagName: '',
+                tagClass: ''
+            },
+            lists: [
+                'layui-bg-red',
+                'layui-bg-orange',
+                'layui-bg-green',
+                'layui-bg-cyan',
+                'layui-bg-blue',
+                'layui-bg-black',
+                'layui-bg-gray'
+            ]
+        }
     },
-    isShow () {
-      this.showStatus = this.isShow
+    methods: {
+        ok() {
+            this.$emit('addEvent', this.localItem)
+            this.$Message.info('操作成功！')
+        },
+        cancel() {
+            this.$emit('changeEvent', false)
+            this.$Message.info('取消操作！')
+        }
     }
-  },
-  data () {
-    return {
-      showStatus: false,
-      localItem: {
-        tagName: '',
-        tagClass: ''
-      },
-      lists: [
-        'layui-bg-red',
-        'layui-bg-orange',
-        'layui-bg-green',
-        'layui-bg-cyan',
-        'layui-bg-blue',
-        'layui-bg-black',
-        'layui-bg-gray'
-      ]
-    }
-  },
-  methods: {
-    ok () {
-      this.$emit('addEvent', this.localItem)
-      this.$Message.info('操作成功！')
-    },
-    cancel () {
-      this.$emit('changeEvent', false)
-      this.$Message.info('取消操作！')
-    }
-  }
 }
 </script>

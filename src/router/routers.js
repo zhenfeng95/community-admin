@@ -18,108 +18,108 @@ import Main from '@/components/main'
  */
 
 export default [
-  {
-    path: '/login',
-    name: 'login',
-    meta: {
-      title: 'Login - 登录',
-      hideInMenu: true
-    },
-    component: () => import('@/view/login/login.vue')
-  },
-  {
-    path: '/',
-    name: '_home',
-    redirect: '/home',
-    component: Main,
-    meta: {
-      hideInMenu: true,
-      notCache: true
-    },
-    children: [
-      {
-        path: '/home',
-        name: 'home',
+    {
+        path: '/login',
+        name: 'login',
         meta: {
-          hideInMenu: true,
-          title: '首页',
-          notCache: true,
-          icon: 'md-home'
+            title: 'Login - 登录',
+            hideInMenu: true
         },
-        component: () => import('@/view/single-page/home')
-      }
-    ]
-  },
-  // ...communityRoutes,
-  {
-    path: '',
-    name: 'doc',
-    meta: {
-      title: '项目文档',
-      icon: 'ios-folder'
+        component: () => import('@/view/login/login.vue')
     },
-    children: [
-      {
-        path: '/iview',
-        name: 'iview-admin',
+    {
+        path: '/',
+        name: '_home',
+        redirect: '/home',
+        component: Main,
         meta: {
-          title: 'iview-admin文档',
-          href: 'https://lison16.github.io/iview-admin-doc/#/',
-          icon: 'ios-book'
-        }
-      },
-      {
-        path: '/api',
-        name: 'api-doc',
-        meta: {
-          title: '接口文档',
-          href: 'https://doc.toimc.com/web/#/2?page_id=42',
-          icon: 'ios-cube'
-        }
-      }
-    ]
-  },
-  {
-    path: '/join',
-    name: 'join',
-    component: Main,
-    meta: {
-      hideInBread: true
-    },
-    children: [
-      {
-        path: 'join_page',
-        name: 'join_page',
-        meta: {
-          icon: '_qq',
-          title: '社区信息'
+            hideInMenu: true,
+            notCache: true
         },
-        component: () => import('@/view/join-page.vue')
-      }
-    ]
-  },
-  {
-    path: '/401',
-    name: 'error_401',
-    meta: {
-      hideInMenu: true
+        children: [
+            {
+                path: '/home',
+                name: 'home',
+                meta: {
+                    hideInMenu: true,
+                    title: '首页',
+                    notCache: true,
+                    icon: 'md-home'
+                },
+                component: () => import('@/view/single-page/home')
+            }
+        ]
     },
-    component: () => import('@/view/error-page/401.vue')
-  },
-  {
-    path: '/500',
-    name: 'error_500',
-    meta: {
-      hideInMenu: true
+    // ...communityRoutes,
+    {
+        path: '',
+        name: 'doc',
+        meta: {
+            title: '项目文档',
+            icon: 'ios-folder'
+        },
+        children: [
+            {
+                path: '/iview',
+                name: 'iview-admin',
+                meta: {
+                    title: 'iview-admin文档',
+                    href: 'https://lison16.github.io/iview-admin-doc/#/',
+                    icon: 'ios-book'
+                }
+            },
+            {
+                path: '/api',
+                name: 'api-doc',
+                meta: {
+                    title: '接口文档',
+                    href: 'https://doc.toimc.com/web/#/2?page_id=42',
+                    icon: 'ios-cube'
+                }
+            }
+        ]
     },
-    component: () => import('@/view/error-page/500.vue')
-  },
-  {
-    path: '*',
-    name: 'error_404',
-    meta: {
-      hideInMenu: true
+    {
+        path: '/join',
+        name: 'join',
+        component: Main,
+        meta: {
+            hideInBread: true
+        },
+        children: [
+            {
+                path: 'join_page',
+                name: 'join_page',
+                meta: {
+                    icon: '_qq',
+                    title: '社区信息'
+                },
+                component: () => import('@/view/join-page.vue')
+            }
+        ]
     },
-    component: () => import('@/view/error-page/404.vue')
-  }
+    {
+        path: '/401',
+        name: 'error_401',
+        meta: {
+            hideInMenu: true
+        },
+        component: () => import('@/view/error-page/401.vue')
+    },
+    {
+        path: '/500',
+        name: 'error_500',
+        meta: {
+            hideInMenu: true
+        },
+        component: () => import('@/view/error-page/500.vue')
+    },
+    {
+        path: '*',
+        name: 'error_404',
+        meta: {
+            hideInMenu: true
+        },
+        component: () => import('@/view/error-page/404.vue')
+    }
 ]

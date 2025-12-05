@@ -32,17 +32,17 @@
 
 <script>
 export default {
-  name: 'i18n_page',
-  data () {
-    return {
-      modalVisible: false
+    name: 'i18n_page',
+    data() {
+        return {
+            modalVisible: false
+        }
+    },
+    computed: {
+        content() {
+            return this.$t('content')
+        }
     }
-  },
-  computed: {
-    content () {
-      return this.$t('content')
-    }
-  }
 }
 </script>
 
