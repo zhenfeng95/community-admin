@@ -73,10 +73,10 @@
         }
     },
     "lint-staged": {
-        "*.js": [
+        "src/**/*.js": [
             "vue-cli-service lint"
         ],
-        "*.vue": [
+        "src/**/*.vue": [
             "vue-cli-service lint"
         ]
     }
