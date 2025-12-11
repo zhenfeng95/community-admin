@@ -3,19 +3,19 @@
 </style>
 
 <template>
-  <div class="login">
-    <div class="login-con">
-      <Card icon="log-in" title="欢迎登录" :bordered="false">
-        <div class="form-con">
-          <login-form
-            :loading="loading"
-            @on-success-valid="handleSubmit"
-          ></login-form>
-          <p class="login-tip">欢迎来到imooc社区</p>
+    <div class="login">
+        <div class="login-con">
+            <Card icon="log-in" title="欢迎登录" :bordered="false">
+                <div class="form-con">
+                    <login-form
+                        :loading="loading"
+                        @on-success-valid="handleSubmit"
+                    ></login-form>
+                    <p class="login-tip">欢迎来到imooc社区</p>
+                </div>
+            </Card>
         </div>
-      </Card>
     </div>
-  </div>
 </template>
 
 <script>
@@ -52,7 +52,10 @@ export default {
                         const newRoutes = communityRoutes
                         this.$router.addRoutes(newRoutes)
                         // 设置store中的router规则
-                        this.$store.commit('setRouters', newRoutes.concat(routes))
+                        this.$store.commit(
+                            'setRouters',
+                            newRoutes.concat(routes)
+                        )
                         this.$router.push({
                             name: this.$config.homeName
                         })
@@ -60,11 +63,14 @@ export default {
                     }
                     // 用户登录成功之后，获取菜单数据
                     menuDispatch.use('route').then((res) => {
-                        if (res.code === 200) {
+                        if (res.code === 0) {
                             const routesData = res.data
                             localSave('routes', res.data)
                             const routesName = getRoutesName(routesData)
-                            const newRoutes = filterRoutes(communityRoutes, routesName)
+                            const newRoutes = filterRoutes(
+                                communityRoutes,
+                                routesName
+                            )
                             // const newRoutes = communityRoutes.filter((item) => routesName.includes(item.name))
                             // 动态设置路由
                             // addRoutes
@@ -83,7 +89,10 @@ export default {
                             resetRouter()
                             this.$router.addRoutes(newRoutes)
                             // 设置store中的router规则
-                            this.$store.commit('setRouters', newRoutes.concat(routes))
+                            this.$store.commit(
+                                'setRouters',
+                                newRoutes.concat(routes)
+                            )
                             this.$router.push({
                                 name: this.$config.homeName
                             })

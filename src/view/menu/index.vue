@@ -1,45 +1,45 @@
 <template>
-  <div>
-    <Row :gutter="10">
-      <i-col span="6" :sm="24" :md="9" :lg="6">
-        <Card :dis-hover="true" :shadow="true">
-          <TreeMenu
-            :isEdit="isEdit"
-            :menu="menuData"
-            @addMenuEvent="addMenu"
-            @editMenuEvent="editMenu"
-            @deleteMenuEvent="deleteMenu"
-            @on-select="handleTreeChange"
-          ></TreeMenu>
-        </Card>
-      </i-col>
-      <i-col span="18" :sm="24" :md="15" :lg="18">
-        <Card
-          :title="$t('Menu Options')"
-          icon="ios-options"
-          :dis-hover="true"
-          :shadow="true"
-          style="margin-bottom: 10px"
-        >
-          <MenuForm
-            :formData="formData"
-            :isEdit="isEdit"
-            :selectNode="selectNode"
-            @cancel="initForm"
-            @submit="submit"
-          ></MenuForm>
-        </Card>
-        <Card :title="$t('resources')" :dis-hover="true" :shadow="true">
-          <OperationsTable
-            :columns="columns"
-            :tableData="tableData"
-            :isEdit="isEdit"
-            @on-change="handleTableChange"
-          ></OperationsTable>
-        </Card>
-      </i-col>
-    </Row>
-  </div>
+    <div>
+        <Row :gutter="10">
+            <i-col span="6" :sm="24" :md="9" :lg="6">
+                <Card :dis-hover="true" :shadow="true">
+                    <TreeMenu
+                        :isEdit="isEdit"
+                        :menu="menuData"
+                        @addMenuEvent="addMenu"
+                        @editMenuEvent="editMenu"
+                        @deleteMenuEvent="deleteMenu"
+                        @on-select="handleTreeChange"
+                    ></TreeMenu>
+                </Card>
+            </i-col>
+            <i-col span="18" :sm="24" :md="15" :lg="18">
+                <Card
+                    :title="$t('Menu Options')"
+                    icon="ios-options"
+                    :dis-hover="true"
+                    :shadow="true"
+                    style="margin-bottom: 10px"
+                >
+                    <MenuForm
+                        :formData="formData"
+                        :isEdit="isEdit"
+                        :selectNode="selectNode"
+                        @cancel="initForm"
+                        @submit="submit"
+                    ></MenuForm>
+                </Card>
+                <Card :title="$t('resources')" :dis-hover="true" :shadow="true">
+                    <OperationsTable
+                        :columns="columns"
+                        :tableData="tableData"
+                        :isEdit="isEdit"
+                        @on-change="handleTableChange"
+                    ></OperationsTable>
+                </Card>
+            </i-col>
+        </Row>
+    </div>
 </template>
 
 <script>
@@ -159,16 +159,16 @@ export default {
         }
     },
     mounted() {
-    // console.log('test getRoutes')
-    // menuDispatch.use('route').then((res) => {
-    //   console.log('mounted -> res', res)
-    // })
+        // console.log('test getRoutes')
+        // menuDispatch.use('route').then((res) => {
+        //   console.log('mounted -> res', res)
+        // })
         this._getMenu()
     },
     methods: {
         _getMenu() {
             menuDispatch.use('get').then((res) => {
-                if (res.code === 200) {
+                if (res.code === 0) {
                     this.menuData = res.data
                 }
             })
@@ -203,13 +203,13 @@ export default {
             if (parent.nodeKey !== select.nodeKey) {
                 // 删除子菜单
                 menuDispatch.use('update', parent).then((res) => {
-                    if (res.code === 200) {
+                    if (res.code === 0) {
                         this.$Message.success('删除子菜单成功！')
                     }
                 })
             } else {
                 menuDispatch.use('delete', { _id: parent._id }).then((res) => {
-                    if (res.code === 200) {
+                    if (res.code === 0) {
                         this.$Message.success('删除菜单成功！')
                     }
                 })
@@ -220,15 +220,18 @@ export default {
             let parent = getNode(this.menuData, this.selectNode[0])
             if (this.tableData.length > 0) {
                 data.operations = this.tableData
+            } else {
+                data.operations = []
             }
             // 1. 获取 formData中的数据 -> menuData中
             //   a. type -> 数据插入的节点
             //   b. 数据需要按照tree的数据格式进行格式化 -> title
+
             if (this.type === 'bro') {
                 // 兄弟节点
                 if (this.menuData.length === 0) {
                     menuDispatch.use('add', data).then((res) => {
-                        if (res.code === 200) {
+                        if (res.code === 0) {
                             this.menuData.push(res.data)
                             this.$Message.success('添加菜单成功！')
                             this.menuData = sortMenus([...this.menuData])
@@ -237,11 +240,11 @@ export default {
                     })
                 } else {
                     const selectNode = this.selectNode[0]
+                    this.menuData = insertNode(this.menuData, selectNode, data)
                     // 1. 可能是一级节点的兄弟节点  -> addMenu -> menu
                     if (parent.nodeKey === selectNode.nodeKey) {
                         menuDispatch.use('add', data).then((res) => {
-                            if (res.code === 200) {
-                                this.menuData = insertNode(this.menuData, selectNode, res.data)
+                            if (res.code === 0) {
                                 this.menuData = sortMenus([...this.menuData])
                                 this.$Message.success('添加菜单成功！')
                             }
@@ -249,14 +252,14 @@ export default {
                     } else {
                         // 2. 可能是二级节点的兄弟节点 -> parent 一级节点 -> updateMenu
                         parent = getNode(this.menuData, selectNode)
+                        console.log(parent)
                         menuDispatch.use('update', parent).then((res) => {
-                            if (res.code === 200) {
+                            if (res.code === 0) {
                                 this.$Message.success('添加菜单成功！')
                                 this.menuData = sortMenus([...this.menuData])
                             }
                         })
                     }
-                    // this.selectNode.length > 0
                 }
             } else if (this.type === 'child') {
                 // 子节点
@@ -271,7 +274,7 @@ export default {
                 parent = getNode(this.menuData, this.selectNode[0])
                 // 更新操作
                 menuDispatch.use('update', parent).then((res) => {
-                    if (res.code === 200) {
+                    if (res.code === 0) {
                         this.menuData = sortMenus([...this.menuData])
                         this.$Message.success('添加子菜单成功！')
                     }
@@ -283,8 +286,9 @@ export default {
                 parent = getNode(this.menuData, this.selectNode[0])
                 // 更新操作
                 menuDispatch.use('update', parent).then((res) => {
-                    if (res.code === 200) {
+                    if (res.code === 0) {
                         this.menuData = sortMenus([...this.menuData])
+                        this.handleTreeChange(this.selectNode)
                         this.$Message.success('更新菜单成功！')
                     }
                 })

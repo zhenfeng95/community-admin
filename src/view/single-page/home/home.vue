@@ -1,55 +1,59 @@
 <template>
-  <div>
-    <Row :gutter="20">
-      <i-col
-        :xs="12"
-        :md="8"
-        :lg="4"
-        v-for="(infor, i) in inforCardData"
-        :key="`infor-${i}`"
-        style="height: 120px;padding-bottom: 10px;"
-      >
-        <infor-card
-          shadow
-          :color="infor.color"
-          :icon="infor.icon"
-          :icon-size="36"
-          :key="timer1"
-        >
-          <count-to :end="infor.count" count-class="count-style" />
-          <p>{{ infor.title }}</p>
-        </infor-card>
-      </i-col>
-    </Row>
-    <Row :gutter="20" style="margin-top: 10px;">
-      <i-col :md="24" :lg="8" style="margin-bottom: 20px;">
-        <Card shadow>
-          <chart-pie
-            style="height: 300px;"
-            :value="pieData"
-            text="发帖统计"
-            tipname="统计内容"
-            :key="timer2"
-          ></chart-pie>
-        </Card>
-      </i-col>
-      <i-col :md="24" :lg="16" style="margin-bottom: 20px;">
-        <Card shadow>
-          <chart-bar
-            style="height: 300px;"
-            :value="barData"
-            text="近6月的累计发帖"
-            :key="timer3"
-          />
-        </Card>
-      </i-col>
-    </Row>
-    <Row>
-      <Card shadow class="w100">
-        <week-stat :key="timer4" :weekData="weekData" style="height: 310px;" />
-      </Card>
-    </Row>
-  </div>
+    <div>
+        <Row :gutter="20">
+            <i-col
+                :xs="12"
+                :md="8"
+                :lg="4"
+                v-for="(infor, i) in inforCardData"
+                :key="`infor-${i}`"
+                style="height: 120px; padding-bottom: 10px"
+            >
+                <infor-card
+                    shadow
+                    :color="infor.color"
+                    :icon="infor.icon"
+                    :icon-size="36"
+                    :key="timer1"
+                >
+                    <count-to :end="infor.count" count-class="count-style" />
+                    <p>{{ infor.title }}</p>
+                </infor-card>
+            </i-col>
+        </Row>
+        <Row :gutter="20" style="margin-top: 10px">
+            <i-col :md="24" :lg="8" style="margin-bottom: 20px">
+                <Card shadow>
+                    <chart-pie
+                        style="height: 300px"
+                        :value="pieData"
+                        text="发帖统计"
+                        tipname="统计内容"
+                        :key="timer2"
+                    ></chart-pie>
+                </Card>
+            </i-col>
+            <i-col :md="24" :lg="16" style="margin-bottom: 20px">
+                <Card shadow>
+                    <chart-bar
+                        style="height: 300px"
+                        :value="barData"
+                        text="近6月的累计发帖"
+                        :key="timer3"
+                    />
+                </Card>
+            </i-col>
+        </Row>
+        <Row>
+            <Card shadow class="w100">
+                <week-stat
+                    :key="timer4"
+                    :weekData="weekData"
+                    style="height: 310px"
+                />
+            </Card>
+        </Row>
+    </div>
 </template>
 
 <script>
@@ -81,7 +85,12 @@ export default {
                     count: 0,
                     color: '#2d8cf0'
                 },
-                { title: '发帖累计', icon: 'md-locate', count: 0, color: '#19be6b' },
+                {
+                    title: '发帖累计',
+                    icon: 'md-locate',
+                    count: 0,
+                    color: '#19be6b'
+                },
                 {
                     title: '新增评论',
                     icon: 'md-chatbubbles',
@@ -94,8 +103,18 @@ export default {
                     count: 0,
                     color: '#ed3f14'
                 },
-                { title: '本周签到', icon: 'md-contacts', count: 0, color: '#E46CBB' },
-                { title: '本周发帖', icon: 'md-map', count: 0, color: '#9A66E4' }
+                {
+                    title: '本周签到',
+                    icon: 'md-contacts',
+                    count: 0,
+                    color: '#E46CBB'
+                },
+                {
+                    title: '本周发帖',
+                    icon: 'md-map',
+                    count: 0,
+                    color: '#9A66E4'
+                }
             ],
             pieData: [
                 { value: 0, name: '提问' },
@@ -108,13 +127,13 @@ export default {
         }
     },
     mounted() {
-    //
+        //
         this.getData()
     },
     methods: {
         getData() {
             getStatData().then((res) => {
-                if (res.code === 200) {
+                if (res.code === 0) {
                     // method 1
                     // this.inforCardData.forEach((item, index) => {
                     //   console.log('getData -> index', index)
@@ -134,7 +153,8 @@ export default {
                     // method 3
                     if (res.data.inforCardData) {
                         this.inforCardData.forEach(
-                            (item, index) => (item.count = res.data.inforCardData[index])
+                            (item, index) =>
+                                (item.count = res.data.inforCardData[index])
                         )
                         this.timer1 = new Date().getTime()
                     }
@@ -177,10 +197,10 @@ export default {
 
 <style lang="less">
 .count-style {
-  font-size: 50px;
+    font-size: 50px;
 }
 
 .w100 {
-  width: 100%;
+    width: 100%;
 }
 </style>

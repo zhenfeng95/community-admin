@@ -1,4 +1,5 @@
 export default {
+    website_title: '社区管理后台',
     home: '首页',
     login: '登录',
     components: '组件',

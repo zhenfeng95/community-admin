@@ -423,21 +423,7 @@ export default {
         _getRoleNames() {
             roleDispatch.use('roles').then((res) => {
                 if (res.code === 0) {
-                    this.roles =
-                        [
-                            {
-                                role: 'super_admin',
-                                name: '超级管理员'
-                            },
-                            {
-                                role: 'admin',
-                                name: '管理员'
-                            },
-                            {
-                                role: 'user',
-                                name: '普通用户'
-                            }
-                        ] || res.data
+                    this.roles = res.data
                 }
             })
         }

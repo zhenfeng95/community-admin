@@ -1,4 +1,5 @@
 export default {
+    website_title: 'Community management backend',
     home: 'Home',
     login: 'Login',
     components: 'Components',
@@ -33,7 +34,7 @@ export default {
     content: 'This is the modal box content.',
     buttonText: 'Show Modal',
     'i18n-tip':
-    'Note: Only this page is multi-language, other pages do not add language content to the multi-language package.',
+        'Note: Only this page is multi-language, other pages do not add language content to the multi-language package.',
     error_store_page: 'Error Collection',
     error_logger_page: 'Error Logger',
     query: 'Query',
