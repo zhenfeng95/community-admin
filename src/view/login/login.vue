@@ -11,7 +11,7 @@
                         :loading="loading"
                         @on-success-valid="handleSubmit"
                     ></login-form>
-                    <p class="login-tip">欢迎来到imooc社区</p>
+                    <p class="login-tip">欢迎来到imooc社区12</p>
                 </div>
             </Card>
         </div>
