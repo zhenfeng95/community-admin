@@ -147,7 +147,7 @@ export default {
                             return [...obj, item._id]
                         }, [])
                         errorDispatch.use('delete', { ids: arr }).then((res) => {
-                            if (res.code === 200) {
+                            if (res.code === 0) {
                                 this.data = this.data.filter((item) => {
                                     if (!arr.includes(item._id)) {
                                         return item

@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+    <div id="app">
+        <router-view />
+    </div>
 </template>
 
 <script>
@@ -26,7 +26,7 @@ export default {
             return
         }
         // 用户登录成功之后，获取菜单数据
-        const routesData = localRead('routes')
+        const routesData = localRead('routes') || []
         const routesName = getRoutesName(routesData)
         const newRoutes = filterRoutes(communityRoutes, routesName)
         // const newRoutes = communityRoutes.filter((item) => routesName.includes(item.name))
@@ -55,17 +55,17 @@ export default {
 
 <style lang="less">
 .size {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 html,
 body {
-  .size;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
+    .size;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 #app {
-  .size;
+    .size;
 }
 </style>
